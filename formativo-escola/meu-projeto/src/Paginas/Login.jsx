@@ -1,10 +1,11 @@
 // axios faz as requisições Http(s), ou seja posso consulatr um backend
 import axios from 'axios';
 // Validar aquilo que foi colocado, antes de mandar para o backend
-import { useForm } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers';
+import { zodResolver } from '@hookform/resolvers/zod';
 import estilos from './Login.module.css';
+import { Cabecalho } from '../Componentes/Cabecalho';
 
 
 
@@ -31,6 +32,7 @@ export function Login(){
 async function ObterDados(data) {
     console.log(`Dados ${data}`)
 
+
     try{
         const response = await axios.post('http://127.0.0.1:800/api/login/', {
             username: data.username,
@@ -52,6 +54,7 @@ async function ObterDados(data) {
 }
 
     return(
+        
         <div className={estilos.container}>
             <form onSubmit={handleSubmit(ObterDados)} className={estilos.loginForm}>
                 <h2 className={estilos.titulo}>Login</h2>

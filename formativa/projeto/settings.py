@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'app',
-    'corsheader',
+    'corsheaders',
 ]
 
 AUTH_USER_MODEL = 'app.usuario'
@@ -63,13 +63,12 @@ SIMPLE_JWT = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheader.middleware.CorsMiddeleware',
-    'django.middleware.common.Commonware',
 ]
 
 ROOT_URLCONF = 'projeto.urls'
@@ -100,7 +99,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cadastro',
         'USER': 'root',
-        'PASSWORD': 'senai',
+        # 'PASSWORD': 'senai',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '3306'
     }
