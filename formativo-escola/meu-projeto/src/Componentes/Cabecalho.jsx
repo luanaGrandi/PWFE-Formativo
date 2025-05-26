@@ -6,11 +6,6 @@ export function Cabecalho(){
     return(
         <header className={estilos.container}>
             <img className={estilos.imgLogo} src={logo} alt="Logo Prof Conecta" />
-            <div className={estilos.login}>
-                <p>login</p>
-                <img src={login}/>
-            </div>
-           
         </header>
     )
 }

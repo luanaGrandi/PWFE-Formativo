@@ -1,34 +1,68 @@
-.container{
-    width: 96%;
-    height: 80%;
+.menu{
+    margin-top: 5vh;
+    margin-left: 18vh;
+    display: flex;
+    gap: 3vh;  
+}
+
+.titulo{
+    font-size: 4vh;
+    padding-left: 18vh;
+    padding-top: 3vh;
+    color: #4D3E6A;
+}
+.card{
+    background-color: #81749B;
+    width:40vh ;
+    height: 23vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
 }
 
-table{
-    width: 700px;
-    height: 500px;
-    background-color:#81749b94 ;
-    padding: 10px;
-    border-radius: 36px;
-    border: 9px solid #4D3E6A;
+.card:hover{
+    transform: scale(1.05);
+    cursor: pointer;
 }
 
-td{
-    text-align: center;
+.descricao{
+    color: #ffff;
+    font-size: 4vh;
 }
 
-td img{
-    margin-bottom: 5px;
+.icone{
+    width: 5vh;
 }
 
-td label{
-    display: block;
-    margin-top: 5px;
-    color: aliceblue;
-    font-family: Arial, Helvetica, sans-serif;
-
-
+.nossaHistoria{
+    background-color:#D9D9D9 ;
+    height: 64vh;
 }
+
+.subtitulo{
+    font-size: 7vh;
+    color: #4D3E6A;
+    margin-top: 12vh;
+    margin-left: 40%;
+    padding-top: 4vh;
+}
+
+.imgLogo{
+    display: flex;
+    width: 40%;
+}
+
+.info{
+    margin-top: 3vh;
+    display: flex;
+    align-items: center;
+    gap: 3vh;
+}
+
+.descricoes{
+    width: 80vh;
+    font-size: 3vh;
+}
+

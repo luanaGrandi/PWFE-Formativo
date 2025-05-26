@@ -6,8 +6,8 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import estilos from './Login.module.css';
 import { Cabecalho } from '../Componentes/Cabecalho';
-
-
+import logoBranca  from '../assets/logoBranca.png'
+import { Footer } from '../Componentes/Footer';
 
 // pegar do backend
 const schemaLogin = z.object({
@@ -54,9 +54,12 @@ async function ObterDados(data) {
 }
 
     return(
-        
+       <>
+        <Cabecalho/>
         <div className={estilos.container}>
+           
             <form onSubmit={handleSubmit(ObterDados)} className={estilos.loginForm}>
+                <img class={estilos.logobranca} src={logoBranca} alt="Logo Prof Conecta" />
                 <h2 className={estilos.titulo}>Login</h2>
 
                 <label className={estilos.label}>Usuario</label>
@@ -81,7 +84,10 @@ async function ObterDados(data) {
 
                 <button type='submit' className={estilos.submitButton}>Entrar</button>
             </form>
+        
         </div>
+        <Footer/>
+        </>
     )
 }
 

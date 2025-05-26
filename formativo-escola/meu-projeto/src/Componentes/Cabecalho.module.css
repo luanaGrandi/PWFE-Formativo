@@ -3,6 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-bottom: 2px solid black;  
 }
 
 .titulo{
@@ -15,9 +16,6 @@
 
 .imgLogo{
     width: 21vh;
+   
 } 
 
-.login{
-    display: flex;
-    align-items: center;
-}

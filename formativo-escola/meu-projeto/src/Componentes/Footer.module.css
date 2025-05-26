@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    background-color: #4D3E6A;
+    height: 7vh;
+    border: none;
+}
+
+.creditos{
+    padding-top: 2vh;
+    font-size: 2vh;
+    color: #ffff;
+    padding-left: 90vh;
+}
