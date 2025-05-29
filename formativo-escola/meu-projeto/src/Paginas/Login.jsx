@@ -1,93 +1,95 @@
 // axios faz as requisições Http(s), ou seja posso consulatr um backend
 import axios from 'axios';
 // Validar aquilo que foi colocado, antes de mandar para o backend
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from 'react-router-dom';
 import estilos from './Login.module.css';
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Cabecalho } from '../Componentes/Cabecalho';
-import logoBranca  from '../assets/logoBranca.png'
 import { Footer } from '../Componentes/Footer';
-
+ 
 // pegar do backend
 const schemaLogin = z.object({
     username: z.string()
-        .min(1, 'Informe o seu usuario')
-        .max(255, 'Informe no maximo 30 caracteres'),
+        .min(1, 'Informe um nome')
+        .max(25, 'Informe no máximo 25 caracteres'),
     password: z.string()
-        .min (1, 'Informe as menos um caractere')
-        .max (2, 'Informe no maximo de 15 caractere'),
+        .min(1, 'Informe uma senha')
+        .max(15, 'Informe no máximo 15 caracteres')
 });
-
-export function Login(){
+ 
+export function Login() {
     // registra todas as infomações que são dadas pelo usuario e tenta resolver de acordo com o schema
-    const{
+    const navigate = useNavigate();
+ 
+    const {
         register,
         handleSubmit,
-        formState: {errors}
-    }=useForm(
-        {resolver: zodResolver(schemaLogin)}
-);
-// ver o que esta sendo resgatado
-async function ObterDados(data) {
-    console.log(`Dados ${data}`)
-
-
-    try{
-        const response = await axios.post('http://127.0.0.1:800/api/login/', {
-            username: data.username,
-            password: data.password
-        });
-        const {access, refresh, user} = response.data;
-
-        localStorage.setItem('access_token', access)
-        localStorage.setItem('refresh_token', refresh)
-        localStorage.setItem('tipo', user.tipo)
-        localStorage.setItem('usermane', username)
-
-        console.log("Login efetuado com sucesso")
-        alert("Login efetuado com sucesso")
-    }catch(error){
-        console.error('deu ruim', error)
-        alert("dados invalidos")
+        formState: { errors }
+    } = useForm({
+        resolver: zodResolver(schemaLogin)
+    });
+    // ver o que esta sendo resgatado
+    async function obterDadosFormulario(data) {
+        console.log(`Dados: ${data}`)
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/api/login/', {
+                username: data.username,
+                password: data.password
+            });
+ 
+            const { access, refresh, user } = response.data;
+ 
+            localStorage.setItem('access_token', access);
+            localStorage.setItem('refresh_token', refresh);
+            localStorage.setItem('tipo', user.tipo);
+            localStorage.setItem('user_id', user.id);
+            localStorage.setItem('username', user.username);
+ 
+            console.log('Login bem-sucedido!');          
+            navigate('/inicial');
+         
+ 
+        } catch (error) {
+            console.error('Erro de autenticação', error);
+            alert("Dados Inválidos, por favor verifique suas credenciais");
+        }
     }
-}
+ 
+    return (
 
-    return(
-       <>
+        <>
         <Cabecalho/>
         <div className={estilos.container}>
-           
-            <form onSubmit={handleSubmit(ObterDados)} className={estilos.loginForm}>
-                <img class={estilos.logobranca} src={logoBranca} alt="Logo Prof Conecta" />
+            <form onSubmit={handleSubmit(obterDadosFormulario)} className={estilos.loginForm}>
                 <h2 className={estilos.titulo}>Login</h2>
-
-                <label className={estilos.label}>Usuario</label>
                 {/* registrar o que o usuario fez input no usermane */}
-                <input className={estilos.inputField} 
+                <label className={estilos.label}>Usuário:</label>
+                <input
                     {...register('username')}
-                    // exemplo do preenchimento
-                    placeholder='exemplo: luanaGrandi'
+                    placeholder='username'
+                    className={estilos.inputField}
+                    
                 />
                 {/* se houver erro no username, pegar a mensagem de erro lá emcima */}
                 {errors.username && <p className={estilos.error}>{errors.username.message}</p>}
 
-
-                <label className={estilos.label}>Senha:</label>
-                <input className={estilos.inputField} 
+                 {/* se houver algum erro no password, pegar a mensagem de erro lá emcima */}
+                <label className={estilos.label}>Senha: </label>
+                <input
                     {...register('password')}
                     placeholder='Senha'
                     type="password"
+                    className={estilos.inputField}
                 />
-                {/* se houver algum erro no password, pegar a mensagem de erro lá emcima */}
                 {errors.password && <p className={estilos.error}>{errors.password.message}</p>}
-
-                <button type='submit' className={estilos.submitButton}>Entrar</button>
+ 
+                <button type="submit" className={estilos.submitButton}>Entrar</button>
             </form>
-        
         </div>
         <Footer/>
         </>
-    )
+    );
 }
-
+ 

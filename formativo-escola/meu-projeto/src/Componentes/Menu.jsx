@@ -4,20 +4,22 @@ import disciplina from '../assets/disciplina.png';
 import gestor from '../assets/gestor.png';
 import professor from '../assets/professor.png';
 import logo from '../assets/logoProf.png'
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function Menu(){
 
-    const navigate = useNavigate();
+    
 
     return(
         
       <main>
         <h1 className={estilos.titulo}>OPÇÕES</h1>
             <div className={estilos.menu}>
-                <div className={estilos.card} onClick={() => navigate('/disciplinas')}>
+                <div className={estilos.card}>
+                    <Link to= 'DisciplinaProf'>
                     <img className={estilos.icone} src={disciplina} alt="icone de chapeu" />
                     <label className={estilos.descricao} alt='disciplinas do professor'>Disciplinas</label>
+                    </Link>
                 </div>
                 <div className={estilos.card} onClick={() => navigate('/ambientes')}>
                     <img className={estilos.icone} src={ambiente} alt="icone de localização" />
