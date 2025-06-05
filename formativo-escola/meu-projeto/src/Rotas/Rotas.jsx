@@ -4,6 +4,7 @@ import { Inicial } from "../Paginas/Inicial";
 import { Menu } from '../Componentes/Menu';
 import { DisciplinasProfessor } from '../Paginas/DisciplinasProfessor'
 import { Disciplina } from "../Paginas/Disciplina";
+import { DisciplinaEditar } from '../Paginas/DisciplinaEditar';
 
 
 export function Rotas(){
@@ -15,6 +16,7 @@ export function Rotas(){
                 <Route index element={<Menu/>}/>
                 <Route path='DisciplinaProf' element={<DisciplinasProfessor/>}/>
                 <Route path= 'disciplina' element = {<Disciplina/>} />
+                <Route path='/disciplina/editar/:id' element={<DisciplinaEditar />} />
             </Route>
         </Routes>
     )

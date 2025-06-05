@@ -4,6 +4,7 @@ import add from '../assets/add.png';
 import excluir from '../assets/excluir.png';
 import editar from '../assets/editar.png';
 import estilos from './Visualizar.module.css'
+import { Link } from 'react-router-dom';
 
 export function Disciplina(){
     const[disciplinas, setDisciplinas] = useState([]);
@@ -47,6 +48,29 @@ export function Disciplina(){
         });
     },[])
 
+
+    //Função de exclusão da Disciplina
+        const handleDelete = (id) => {
+            const confirmar = window.confirm('Tem certeza que deseja excluir esta reserva?');
+            if (!confirmar) return;
+
+            const token = localStorage.getItem('access_token');
+
+            axios.delete(`http://127.0.0.1:8000/api/disciplinas/${id}/`, {
+                headers: {
+                'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(() => {
+                alert('Disciplina excluída com sucesso!');
+                setDisciplinas(prev => prev.filter(dis => dis.id !== id));
+            })
+            .catch(error => {
+                console.error('Erro ao excluir disciplina:', error);
+                alert('Erro ao excluir a disciplina.');
+            });
+            };
+
     return(
         <main className={estilos.container}>
             <h3 className={estilos.titulo}>Disciplinas</h3>
@@ -75,8 +99,14 @@ export function Disciplina(){
                                 <td>{Disciplina.carga_horaria}</td>
                                 <td>{professores[Disciplina.professor]}</td>
                                 <td>
-                                    <img className={estilos.icone} src={editar} />
-                                    <img className={estilos.icone} src={excluir}/>
+                                    {/* editar a disciplina */}
+                                    <Link to={`/inicial/disciplina/editar/${Disciplina.id}`}>
+                                        <img className={estilos.icone} src={editar} />
+                                    </Link>
+                                   
+                                    <img className={estilos.icone} src={excluir}
+                                    onClick={() => handleDelete(Disciplina.id)}/> 
+                                    
                                 </td>
                             </tr>
                         ))}

@@ -1,11 +1,14 @@
-.container{
-    height: 125px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 2px solid black;  
+.container {
+  display: flex;
+  align-items: center;          
+  justify-content: space-between; 
+  padding: 0 20px;              
+  height: 9vh;                 
+  background-color: #fff;       
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+  border-bottom: 2px solid black; 
 }
-
+    
 .titulo{
     font-size: 30px;
     color: #81749B;
@@ -19,3 +22,24 @@
    
 } 
 
+.usuarioSaudacao{
+    color: black;
+}
+
+.usuarioSaudacao{
+    font-size: 4vh;
+    margin-right: 10vh;
+}
+
+.sair {
+  display: flex;          
+  align-items: center;     
+  gap: 8px;                
+  cursor: pointer;         
+  
+}
+.sair img {
+  width: 3vh;
+  height: 0%;
+  object-fit: contain; /* garante que a imagem não distorça */
+}
