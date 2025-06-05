@@ -7,7 +7,9 @@ import logo from '../assets/logoProf.png'
 import { Link } from "react-router-dom";
 
 export function Menu(){
+    const tipo = localStorage.getItem('tipo');
 
+    const linkDisciplina = tipo ==='P' ?  'DisciplinaProf' : 'disciplina'
     
 
     return(
@@ -16,12 +18,12 @@ export function Menu(){
         <h1 className={estilos.titulo}>OPÇÕES</h1>
             <div className={estilos.menu}>
                 <div className={estilos.card}>
-                    <Link to= 'DisciplinaProf'>
+                    <Link to= {linkDisciplina}>
                     <img className={estilos.icone} src={disciplina} alt="icone de chapeu" />
                     <label className={estilos.descricao} alt='disciplinas do professor'>Disciplinas</label>
                     </Link>
                 </div>
-                <div className={estilos.card} onClick={() => navigate('/ambientes')}>
+                <div className={estilos.card}>
                     <img className={estilos.icone} src={ambiente} alt="icone de localização" />
                     <label className={estilos.descricao} alt='ambientes do professor'>Ambiente</label>
                 </div>
