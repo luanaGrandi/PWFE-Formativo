@@ -7,17 +7,21 @@ import { Disciplina } from "../Paginas/Disciplina";
 import { DisciplinaEditar } from '../Paginas/DisciplinaEditar';
 
 
-export function Rotas(){
-    return(
-        <Routes>
-            <Route path='/' element={<Login/>}/>
 
-            <Route path='/inicial' element={<Inicial/>}>
-                <Route index element={<Menu/>}/>
-                <Route path='DisciplinaProf' element={<DisciplinasProfessor/>}/>
-                <Route path= 'disciplina' element = {<Disciplina/>} />
-                <Route path='/disciplina/editar/:id' element={<DisciplinaEditar />} />
-            </Route>
-        </Routes>
-    )
+
+export function Rotas() {
+  return (
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/inicial" element={<Inicial />}>
+        <Route index element={<Menu />} />
+        <Route path="disciplinaprof" element={<DisciplinasProfessor />} />
+        <Route path="disciplina">
+          <Route index element={<Disciplina />} />
+          <Route path="editar/:id" element={<DisciplinaEditar />} />
+        <Route path="disCad" element={<DisciplinaEditar />} />
+    </Route>
+      </Route>
+    </Routes>
+  );
 }

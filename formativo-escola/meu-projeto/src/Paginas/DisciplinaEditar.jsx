@@ -85,13 +85,13 @@ export function DisciplinaEditar() {
             );
  
             console.log('Disciplina cadastrado com sucesso!', response.data);
-            alert('Disciplina cadastrado com sucesso!');
+            alert('Disciplina editada com sucesso!');
             reset();
             navigate('/inicial/disciplina');
  
         } catch (error) {
             console.error('Erro ao cadastrar disciplina', error);
-            alert("Erro ao cadastrar disciplina");
+            alert("Erro ao editar disciplina");
         }
     }
  
@@ -99,7 +99,7 @@ export function DisciplinaEditar() {
         <div className={estilos.conteiner}>
            
             <form className={estilos.loginForm} onSubmit={handleSubmit(obterDadosFormulario)}>
-                    <h2 className={estilos.titulo}>Cadastro de Disciplina</h2>
+                    <h2 className={estilos.titulo}>Editar Disciplina</h2>
                     <label className ={estilos.nomeCampo} >Nome da Disciplina</label>
                     <input                        
                         className={estilos.inputField}
@@ -126,7 +126,7 @@ export function DisciplinaEditar() {
                         {...register('carga_horaria', { valueAsNumber: true })}
                         placeholder="75"
                     />
-                    {errors.cargaHoraria &&
+                    {errors.carga_horaria &&
                     <p className={estilos.error}>
                         {errors.carga_horaria.message}
                     </p>}
@@ -156,7 +156,7 @@ export function DisciplinaEditar() {
  
                 <div className={estilos.icones}>
                     <button className={estilos.submitButton} type="submit">
-                        Cadastrar
+                        Editar
                     </button>
                 </div>
             </form>

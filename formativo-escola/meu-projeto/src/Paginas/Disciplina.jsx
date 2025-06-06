@@ -74,9 +74,9 @@ export function Disciplina(){
     return(
         <main className={estilos.container}>
             <h3 className={estilos.titulo}>Disciplinas</h3>
-            <div className={estilos.topoAcoes}>
+            <Link to="disCad" className={estilos.topoAcoes}>
                 <img className={estilos.iconeAdd} src={add} alt="adicionar disciplinas" />
-            </div>
+            </Link>
             <div className={estilos.tabelaWrapper}>
                 <table className={estilos.tabeladados}>
                     <thead>

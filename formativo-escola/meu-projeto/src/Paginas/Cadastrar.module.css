@@ -1,0 +1,80 @@
+
+.conteiner {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  margin-top: 9vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+.titulo {
+  font-size: 5vh;
+  color: #4D3E6A;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+
+.nomeCampo {
+  font-size: 3vh;
+  color: #4D3E6A;
+  margin-bottom: 6px;
+}
+
+
+.inputField {
+  padding: 10px 14px;
+  font-size: 2vh;
+  border: 1.8px solid #bdc3c7;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+}
+
+
+.error {
+  color: #e74c3c;
+  font-size: 2vh;
+  margin-top: -8px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+
+.submitButton {
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  background-color: #4D3E6A;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.submitButton:hover { 
+    background-color:#ffffff;
+    color: #4D3E6A;
+    border: 2px solid #4D3E6A;
+}
+
+
+
+
