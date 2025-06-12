@@ -10,7 +10,7 @@ export function Menu(){
     const tipo = localStorage.getItem('tipo');
 
     const linkDisciplina = tipo ==='P' ?  'DisciplinaProf' : 'disciplina'
-    const linkProfessor = tipo ==='P' ?  'DisciplinaProf' : 'disciplina'
+    
     
 
     return(
@@ -25,8 +25,17 @@ export function Menu(){
                     </Link>
                 </div>
                 <div className={estilos.card}>
-                    <img className={estilos.icone} src={ambiente} alt="icone de localização" />
-                    <label className={estilos.descricao} alt='ambientes do professor'>Ambiente</label>
+                    <Link to= 'reservas'>
+                        <img className={estilos.icone} src={ambiente} alt="icone de localização" />
+                        <label className={estilos.descricao} alt='ambientes do professor'>Reserva</label>
+                    </Link>
+                </div>
+                {/* mudar o icone */}
+                <div className={estilos.card}>
+                    <Link to= 'salas'>
+                        <img className={estilos.icone} src={ambiente} alt="icone de localização" />
+                        <label className={estilos.descricao} alt='ambientes do professor'>Salas</label>
+                    </Link>
                 </div>
                 <div className={estilos.card}>
                     <Link to='professores'>

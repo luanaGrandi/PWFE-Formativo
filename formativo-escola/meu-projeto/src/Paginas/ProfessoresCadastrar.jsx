@@ -7,26 +7,33 @@ import estilos from './Cadastrar.module.css';
 import { useState, useEffect } from 'react';
  
 const schemaDisciplina = z.object({
-    nome: z.string()
-        .min(1, 'Informe ao menos um caractere')
+    username: z.string()
+        .min(5, 'Informe ao menos dez caractere')
         .max(100, 'Informe até 100 caracteres'),
-    curso: z.string()
-        .min(1, 'Informe ao menos um caractere')
+    last_name: z.string()
+        .min(5, 'Informe ao menos dez caractere')
         .max(100, 'Informe até 100 caracteres'),
-    carga_horaria: z.number({
-        invalid_type_error: 'Informe a cargahorária'})
-        .int("Deve ser um número inteiro")
-        .min(1, "A carga horária mínima é 1 hora")
-        .max(260, "A carga horária máxima é 260 horas"),
-    descricao: z.string()
-        .min(1, 'Informe ao menos um caractere')
-        .max(300, 'Informe até 300 caracteres'),
-    professor: z.number({
-        invalid_type_error: 'Selecione um professor'
-                            }).min(1, 'Selecione um professor')
+    first_name: z.string()
+        .min(5, 'Informe ao menos dez caractere')
+        .max(100, 'Informe até 100 caracteres'),
+    password: z.string()
+        .min(4, 'Informe ao menos um caractere')
+        .max(100, 'Informe até 100 caracteres'),
+    ni: z.number({ invalid_type_error: 'NI deve ser um número' })
+        .int('NI deve ser inteiro')
+        .positive('NI deve ser positivo'),
+    telefone: z.string()
+        .min(5, 'Informe 19 caracteres')
+        .max(19, 'Informe até 19 caracteres'),
+    data_nascimento: z.string()
+        .min(10, 'data invalida')
+        .max(10, 'data invalida'),
+    data_contratacao: z.string()
+        .min(10, 'data invalida')
+        .max(10, 'data invalida'),
 });
  
-export function DisciplinaCadastrar() {
+export function ProfessoresCadastrar() {
  
     const [professores, setProfessores] = useState([]);
     const {
@@ -64,7 +71,7 @@ export function DisciplinaCadastrar() {
             const token = localStorage.getItem('access_token');
  
             const response = await axios.post(
-                'http://127.0.0.1:8000/api/disciplinas/',
+                'http://127.0.0.1:8000/api/usuario/',
                 data,
                 {
                     headers: {
@@ -74,13 +81,13 @@ export function DisciplinaCadastrar() {
                 }
             );
  
-            console.log('Disciplina cadastrado com sucesso!', response.data);
-            alert('Disciplina cadastrado com sucesso!');
+            console.log('usuario cadastrado com sucesso!', response.data);
+            alert('usuario cadastrado com sucesso!');
             reset();
  
         } catch (error) {
-            console.error('Erro ao cadastrar disciplina', error);
-            alert("Erro ao cadastrar disciplina");
+            console.error('Erro ao cadastrar usuario', error);
+            alert("Erro ao cadastrar usuario");
         }
     }
  
@@ -88,61 +95,86 @@ export function DisciplinaCadastrar() {
         <div className={estilos.conteiner}>
            
             <form className={estilos.loginForm} onSubmit={handleSubmit(obterDadosFormulario)}>
-                    <h2 className={estilos.titulo}>Cadastrar de Disciplina</h2>
-                    <label className ={estilos.nomeCampo} >Nome da Disciplina</label>
+                    <h2 className={estilos.titulo}>Cadastro de Professor</h2>
+                    <label className ={estilos.nomeCampo} >Primeiro nome</label>
                     <input                        
                         className={estilos.inputField}
-                        {...register('nome')}
-                        placeholder="Materia"
+                        {...register('first_name')}
+                        placeholder="Luana"
                     />
-                    {errors.nome && <p className={estilos.error}>{errors.nome.message}</p>}
+                    {errors.first_name && <p className={estilos.error}>{errors.first_name.message}</p>}
                
  
-                    <label className ={estilos.nomeCampo}>Nome do curso</label>
+                    <label className ={estilos.nomeCampo}>Sobrenome</label>
                     <input
                         className={estilos.inputField}
-                        {...register('curso')}
-                        placeholder="Desenvolvimento de Sistema"
+                        {...register('last_name')}
+                        placeholder="Grandi"
                     />
-                    {errors.curso && <p className={estilos.error}>{errors.curso.message}</p>}
+                    {errors.last_name && <p className={estilos.error}>{errors.last_name.message}</p>}
                
  
-                    <label className ={estilos.nomeCampo}>Carga horária</label>
+                    <label className ={estilos.nomeCampo}>Username</label>
                     <input
-                     type="number"
+                    //  type="number"
    
                         className={estilos.inputField}
-                        {...register('carga_horaria', { valueAsNumber: true })}
-                        placeholder="75"
+                        {...register('username')}
+                        placeholder="luana Grandi"
                     />
-                    {errors.carga_horaria &&
+                    {errors.username &&
                     <p className={estilos.error}>
-                        {errors.carga_horaria.message}
+                        {errors.username.message}
                     </p>}
                
- 
-                <label className ={estilos.nomeCampo}>Descrição</label>
-                <textarea
-                    className={estilos.inputField}
-                    {...register('descricao')}
-                    placeholder="Descreva o curso com até 2000 caracteres"
-                    rows={5}
-                    />
-                    {errors.descricao && <p className={estilos.error}>{errors.descricao.message}</p>}
+                    <label className ={estilos.nomeCampo}>NI</label>
+                    <input  className={estilos.inputField}
+                        type="number"
+                        {...register('ni', { valueAsNumber: true })}
+                        placeholder="1234"
+                        />
+                        {errors.ni && <p>{errors.ni.message}</p>}
+
+
+                    <label className ={estilos.nomeCampo}>Telefone</label>
+                    <input
+                        className={estilos.inputField}
+                        {...register('telefone')}
+                        placeholder="(XX) XXXXXXXXX"
+                        />
+                        {errors.telefone && <p className={estilos.error}>{errors.telefone.message}</p>}
                
-                    <label className ={estilos.nomeCampo}>Professor</label>
-                    <select className={estilos.inputField}
-                    {...register('professor', { valueAsNumber: true })}>
-                        <option  value="">Selecione um professor</option>
-                        {professores.map((prof) => (
-                            <option className={estilos.inputField} key={prof.id} value={prof.id}>
-                            {prof.username}
-                            </option>
-                        ))}
-                       
-                    </select>
-                    {errors.professor && <p className={estilos.error}>{errors.professor.message}</p>}
-               
+                    <label className={estilos.nomeCampo}>Data de nascimento</label>
+                    <input
+                        type="date"
+                        className={estilos.inputField}
+                        {...register('data_nascimento')}
+                        placeholder="yyyy-mm-dd"
+                        />
+                        {errors.data_nascimento && (
+                            <p className={estilos.error}>{errors.data_nascimento.message}</p>
+                        )}
+
+                    <label className={estilos.nomeCampo}>Data de contratação</label>
+                    <input
+                        type="date"
+                        className={estilos.inputField}
+                        {...register('data_contratacao')}
+                        placeholder="yyyy-mm-dd"
+                        />
+                        {errors.data_contratacao && (
+                            <p className={estilos.error}>{errors.data_contratacao.message}</p>
+                        )}
+
+                    <label className={estilos.nomeCampo}>Senha</label>
+                    <input
+                        type="password"
+                        className={estilos.inputField}
+                        {...register('password')}
+                        placeholder="Senha"
+                        />
+                        {errors.password && <p className={estilos.error}>{errors.password.message}</p>}
+
  
                 <div className={estilos.icones}>
                     <button className={estilos.submitButton} type="submit">
@@ -153,5 +185,4 @@ export function DisciplinaCadastrar() {
         </div>
     );
 }
- 
  

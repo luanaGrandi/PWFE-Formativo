@@ -69,8 +69,8 @@ export function Professores(){
                         <th>Nome</th>
                         <th>Sobrenome</th>
                         <th>Usuário</th>
-                        <th>Email</th>
-                        <th>Tipo</th>
+                        <th>ni</th>
+                        <th>Data de contratacao</th>
                         <th>Ação</th>
                 </tr>
             </thead>
@@ -80,8 +80,8 @@ export function Professores(){
                             <td>{professor.first_name}</td>
                             <td>{professor.last_name}</td>
                             <td>{professor.username}</td>
-                            <td>{professor.email}</td>
-                            <td>{professor.tipo}</td>
+                            <td>{professor.ni}</td>
+                            <td>{professor.data_contratacao}</td>
                            <td className={estilos.acoes}>
                     {/* Passo para o "param" o id do item que posso editar e excluir */}
                    <Link to={`/inicial/professores/editar/${professor.id}`}>
