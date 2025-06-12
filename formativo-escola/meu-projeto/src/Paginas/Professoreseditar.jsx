@@ -7,26 +7,25 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
  
 const schemaDisciplina = z.object({
-    nome: z.string()
+    first_name: z.string()
         .min(1, 'Informe ao menos um caractere')
         .max(100, 'Informe até 100 caracteres'),
-    curso: z.string()
+    last_name: z.string()
         .min(1, 'Informe ao menos um caractere')
         .max(100, 'Informe até 100 caracteres'),
-    carga_horaria: z.number({
-        invalid_type_error: 'Informe a cargahorária'})
-        .int("Deve ser um número inteiro")
-        .min(1, "A carga horária mínima é 1 hora")
-        .max(260, "A carga horária máxima é 260 horas"),
-    descricao: z.string()
+    username: z.string()
+        .min(1, 'Informe ao menos um caractere')
+        .max(100, 'Informe até 100 caracteres'),
+    email: z.string()
         .min(1, 'Informe ao menos um caractere')
         .max(300, 'Informe até 300 caracteres'),
-    professor: z.number({
-        invalid_type_error: 'Selecione um professor'
-                            }).min(1, 'Selecione um professor')
+    tipo: z.string()
+        .min(1, 'Informe ao menos um caractere')
+        .max(1, 'Informe ao menos um caractere')
+        
 });
  
-export function DisciplinaEditar() {
+export function ProfessoresEditar() {
  
     const [professores, setProfessores] = useState([]);
     const { id } = useParams();
@@ -52,14 +51,14 @@ export function DisciplinaEditar() {
                 });
                 setProfessores(response.data);
                 //Preenche o formulários com os dados do registro do ID
-                 const resDisciplina = await axios.get(`http://127.0.0.1:8000/api/disciplinas/${id}/`, {
+                 const resProfessor = await axios.get(`http://127.0.0.1:8000/api/usuario/${id}/`, {
                     headers: {
                          'Authorization': `Bearer ${token}` 
                         }
                 });
  
                 // Preenche o formulário
-                reset(resDisciplina.data);
+                reset(resProfessor.data);
  
             } catch (error) {
                 console.error("Erro ao carregar professores", error);
@@ -74,7 +73,7 @@ export function DisciplinaEditar() {
             const token = localStorage.getItem('access_token');
  
             const response = await axios.patch(
-                `http://127.0.0.1:8000/api/disciplinas/${id}/`,
+                `http://127.0.0.1:8000/api/usuario/${id}/`,
                 data,
                 {
                     headers: {
@@ -84,14 +83,14 @@ export function DisciplinaEditar() {
                 }
             );
  
-            console.log('Disciplina cadastrado com sucesso!', response.data);
-            alert('Disciplina editada com sucesso!');
+            console.log('Professor cadastrado com sucesso!', response.data);
+            alert('Professor editada com sucesso!');
             reset();
-            navigate('/inicial/disciplina');
+            navigate('/inicial/professores');
  
         } catch (error) {
-            console.error('Erro ao cadastrar disciplina', error);
-            alert("Erro ao editar disciplina");
+            console.error('Erro ao cadastrar Professor', error);
+            alert("Erro ao editar professor");
         }
     }
  
@@ -99,60 +98,65 @@ export function DisciplinaEditar() {
         <div className={estilos.conteiner}>
            
             <form className={estilos.loginForm} onSubmit={handleSubmit(obterDadosFormulario)}>
-                    <h2 className={estilos.titulo}>Editar Disciplina</h2>
-                    <label className ={estilos.nomeCampo} >Nome da Disciplina</label>
+                    <h2 className={estilos.titulo}>Editar Professor</h2>
+                    <label className ={estilos.nomeCampo} >Primeiro nome</label>
                     <input                        
                         className={estilos.inputField}
-                        {...register('nome')}
-                        placeholder="Materia"
+                        {...register('first_name')}
+                        placeholder="luana"
                     />
-                    {errors.nome && <p className={estilos.error}>{errors.nome.message}</p>}
+                    {errors.first_name && <p className={estilos.error}>{errors.first_name.message}</p>}
                
  
-                    <label className ={estilos.nomeCampo}>Nome do curso</label>
+                    <label className ={estilos.nomeCampo}>Segundo nome</label>
                     <input
                         className={estilos.inputField}
-                        {...register('curso')}
-                        placeholder="Desenvolvimento de Sistema"
+                        {...register('last_name')}
+                        placeholder="Grandi"
                     />
-                    {errors.curso && <p className={estilos.error}>{errors.curso.message}</p>}
+                    {errors.last_name && <p className={estilos.error}>{errors.last_name.message}</p>}
                
  
-                    <label className ={estilos.nomeCampo}>Carga horária</label>
+                    <label className ={estilos.nomeCampo}>Nome inteiro</label>
                     <input
-                     type="number"
+                    //  type="number"
    
                         className={estilos.inputField}
-                        {...register('carga_horaria', { valueAsNumber: true })}
-                        placeholder="75"
+                        {...register('username')}
+                        placeholder="Luana Grandi"
                     />
-                    {errors.carga_horaria &&
+                    {errors.username &&
                     <p className={estilos.error}>
-                        {errors.carga_horaria.message}
+                        {errors.username.message}
+                    </p>}
+                    
+                    
+                    <label className ={estilos.nomeCampo}>email</label>
+                    <input
+                    //  type="number"
+   
+                        className={estilos.inputField}
+                        {...register('email')}
+                        placeholder="exemplo@gmail.com"
+                    />
+                    {errors.email &&
+                    <p className={estilos.error}>
+                        {errors.email.message}
                     </p>}
                
- 
-                <label className ={estilos.nomeCampo}>Descrição</label>
-                <textarea
-                    className={estilos.inputField}
-                    {...register('descricao')}
-                    placeholder="Descreva o curso com até 2000 caracteres"
-                    rows={5}
-                    />
-                    {errors.descricao && <p className={estilos.error}>{errors.descricao.message}</p>}
-               
-                    <label className ={estilos.nomeCampo}>Professor</label>
+
+                    <label className ={estilos.nomeCampo}>tipo</label>
                     <select className={estilos.inputField}
-                    {...register('professor', { valueAsNumber: true })}>
-                        <option  value="">Selecione um professor</option>
-                        {professores.map((prof) => (
-                            <option className={estilos.inputField} key={prof.id} value={prof.id}>
-                                {prof.username} 
-                            </option>
-                        ))}
+                        {...register('tipo', { valueAsNumber: true })}>
+                            <option  value="">Selecione um tipo</option>
+                            {professores.map((prof) => (
+                                <option className={estilos.inputField} >
+                                {prof.tipo}
+                                </option>
+                            ))}
+            
                     </select>
                     {errors.professor && <p className={estilos.error}>{errors.professor.message}</p>}
-               
  
                 <div className={estilos.icones}>
                     <button className={estilos.submitButton} type="submit">
