@@ -13,6 +13,7 @@ import { Reserva } from "../Paginas/Reserva";
 import { ReservaCadastrar } from "../Paginas/ReservaCadastrar";
 import { Salas } from "../Paginas/Salas";
 import { SalasCadastrar } from "../Paginas/SalasCadastrar";
+import { ReservaEditar } from "../Paginas/ReservaEditar";
 
 
 export function Rotas() {
@@ -37,11 +38,13 @@ export function Rotas() {
         <Route path='reservas'>
           <Route index element= {<Reserva/>}/>
           <Route path="reservaCad" element={<ReservaCadastrar />} />
+          
         </Route>
         
         <Route path='salas'>
           <Route index element={<Salas />}/>
           <Route path="salaCad" element={<SalasCadastrar />}/>
+        
 
         </Route>
         

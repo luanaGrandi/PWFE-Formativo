@@ -57,24 +57,17 @@ class DisciplinaListCreate(ListCreateAPIView):
             queryset = queryset.filter(professor_id=professor_id)
         return queryset
     
-    # verificar se a está sendo criado a mesma disciplina
-    def perform_create(self, serializer):
-        nome = serializer.validated_data['nome']
-        curso = serializer.validated_data['curso']
-        carga_horaria = serializer.validated_data['carga_horaria']
-        descricao = serializer.validated_data['descricao']
+        def perform_create(self, serializer):
+            nome = serializer.validated_data['nome']
+            capacidade_alunos = serializer.validated_data['capacidade_alunos']
 
-        # verificar se os campos são iguais
-        disciplinas_existentes = Disciplina.objects.filter(
-            nome=nome,
-            curso=curso,
-            carga_horaria=carga_horaria,
-            descricao=descricao
-        )
+            salas_existentes = Sala.objects.filter(
+                nome=nome,
+                capacidade_alunos=capacidade_alunos,
+            )
+        if salas_existentes.exists():
+            raise ValidationError("Essa sala já existe.")
 
-        # se for iguais mostrar a mensagem de erro
-        if disciplinas_existentes.exists():
-            raise ValidationError("A disciplina já foi criada!")
         serializer.save()
 
 # essa class vai  fazer o GET, PUT, DELETE e o PACTH
@@ -186,22 +179,20 @@ class loginView(TokenObtainPairView):
 class salasListCreate(ListCreateAPIView):
     queryset = Sala.objects.all()
     serializer_class = SalaSerializer
-    # só o gestor tera permissao de criar e listar
     permission_classes = [IsGestor]
 
-    # verificar se está sendo criada a mesma sala
     def perform_create(self, serializer):
-            nome = serializer.validated_data['nome']
-            capacidade_alunos = serializer.validated_data['capacidade_alunos']
-        
-            # verificar se os campos são iguais um dos outros
-            salas_existentes = Sala.objects.filter(
-                nome=nome,
-                capacidade_alunos=capacidade_alunos,
-            )
-            # se os campos for iguais, exibir essa mesagem de erro
-            if salas_existentes.exists():
-                raise ValidationError("Essa sala já existe.")
+        nome = serializer.validated_data['nome']
+        capacidade_alunos = serializer.validated_data['capacidade_alunos']
+
+        salas_existentes = Sala.objects.filter(
+            nome=nome,
+            capacidade_alunos=capacidade_alunos,
+        )
+        if salas_existentes.exists():
+            raise ValidationError("Essa sala já existe.")
+
+        serializer.save()
            
 # essa class vai consultar as salas pelo Id, e fazer o GET, PUT e o DELETE
 class SalaRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
