@@ -31,22 +31,31 @@ export function Menu(){
                     </Link>
                 </div>
                 {/* mudar o icone */}
-                <div className={estilos.card}>
+                {tipo === 'G'&&(
+                    <>
+                    
+                    <div className={estilos.card}>
                     <Link to= 'salas'>
                         <img className={estilos.icone} src={ambiente} alt="icone de localização" />
                         <label className={estilos.descricao} alt='ambientes do professor'>Salas</label>
                     </Link>
-                </div>
-                <div className={estilos.card}>
-                    <Link to='professores'>
-                        <img className={estilos.icone} src={professor} alt="icone de pessoa que representa professor" />
-                        <label className={estilos.descricao} alt="Prfessores">Professores</label>
-                    </Link>
-                </div>
-                <div className={estilos.card}>
-                    <img className={estilos.icone} src={gestor} alt="icone de grupp, que representa o gestor" />
-                    <label className={estilos.descricao} alt="Gestores">Gestores</label>
-                </div>
+                    </div>
+                    <div className={estilos.card}>
+                        <Link to='professores'>
+                            <img className={estilos.icone} src={professor} alt="icone de pessoa que representa professor" />
+                            <label className={estilos.descricao} alt="Prfessores">Professores</label>
+                        </Link>
+                    </div>
+                    <div className={estilos.card}>
+                        <Link to = 'gestores'>
+                            <img className={estilos.icone} src={gestor} alt="icone de grupp, que representa o gestor" />
+                            <label className={estilos.descricao} alt="Gestores">Gestores</label>
+                        </Link>
+                        
+                    </div>
+                    </>
+                )}
+                
             </div>
             <section className={estilos.nossaHistoria}>
                 <h1 className={estilos.subtitulo}>Nossa Historia</h1>

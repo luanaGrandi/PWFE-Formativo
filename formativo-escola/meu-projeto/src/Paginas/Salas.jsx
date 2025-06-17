@@ -62,7 +62,7 @@ export function Salas() {
                                 <td>{sala.nome}</td>
                                 <td>{sala.capacidade_alunos}</td>
                                 <td>
-                                    <Link to={`/inicial/sala/editar/${sala.id}`}>
+                                    <Link to={`/inicial/salas/editar/${sala.id}`}>
                                         <img className={estilos.icone} src={editar} alt="editar sala" />
                                     </Link>
                                     <img

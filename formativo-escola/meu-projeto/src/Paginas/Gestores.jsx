@@ -7,8 +7,8 @@ import estilos from './Visualizar.module.css'
 import { Link } from 'react-router-dom';
 
 
-export function Professores(){
-    const [professores, setProfessores] = useState([])
+export function Gestores(){
+    const [gestores, setGestores] = useState([])
  
     useEffect(()=>{
  
@@ -21,9 +21,9 @@ export function Professores(){
             }
         })
             .then(response=>{
-                const profs = response.data.filter((user) => user.tipo ==='P');
+                const gestor = response.data.filter((user) => user.tipo ==='G');
                 // console.log(response.data)
-                setProfessores(profs);
+                setGestores(gestor);
                 
                 // setProfessores(response.data)
             })
@@ -34,7 +34,7 @@ export function Professores(){
  
    
         const handleDelete = (id) => {
-        const confirmar = window.confirm('Tem certeza que deseja excluir esse professor');
+        const confirmar = window.confirm('Tem certeza que deseja excluir este gestor?');
         if (!confirmar) return;
  
         const token = localStorage.getItem('access_token');
@@ -45,8 +45,8 @@ export function Professores(){
             }
         })
         .then(() => {
-            alert('Professor excluído com sucesso!');
-            setProfessores(prev => prev.filter(pro => pro.id !== id));
+            alert('Registro excluído com sucesso!');
+            setGestores(prev => prev.filter(pro => pro.id !== id));
         })
         .catch(error => {
             console.error('Erro ao excluir o professor:', error);
@@ -56,9 +56,9 @@ export function Professores(){
  
   return (
     <main className={estilos.container}>
-        <h3 className={estilos.titulo}>Professores</h3>
+        <h3 className={estilos.titulo}>Gestores</h3>
        <div className={estilos.topoAcoes}>
-          <Link to="profCadastrar" className={estilos.botaoAdicionar}>
+          <Link to="GestorCadastrar" className={estilos.botaoAdicionar}>
                 <img src={add} alt="Adicionar" className={estilos.iconeAdd} />        
           </Link>
         </div>
@@ -75,20 +75,20 @@ export function Professores(){
                 </tr>
             </thead>
             <tbody>
-                    {professores.map(professor => (
-                        <tr key={professor.id}>                          
-                            <td>{professor.first_name}</td>
-                            <td>{professor.last_name}</td>
-                            <td>{professor.username}</td>
-                            <td>{professor.ni}</td>
-                            <td>{professor.data_contratacao}</td>
+                    {gestores.map(gestor => (
+                        <tr key={gestor.id}>                          
+                            <td>{gestor.first_name}</td>
+                            <td>{gestor.last_name}</td>
+                            <td>{gestor.username}</td>
+                            <td>{gestor.ni}</td>
+                            <td>{gestor.data_contratacao}</td>
                            <td className={estilos.acoes}>
                     {/* Passo para o "param" o id do item que posso editar e excluir */}
-                   <Link to={`/inicial/professores/editar/${professor.id}`}>
+                   <Link to={`/inicial/gestores/editar/${gestor.id}`}>
                       <img src={editar} className={estilos.icone}/>
                     </Link>
                     <img src={excluir} alt="Excluir" className={estilos.icone}
-                      onClick={() => handleDelete(professor.id)}/>                                  
+                      onClick={() => handleDelete(gestor.id)}/>                                  
                   </td>
                         </tr>
                     ))}

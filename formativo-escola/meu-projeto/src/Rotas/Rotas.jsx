@@ -14,7 +14,10 @@ import { ReservaCadastrar } from "../Paginas/ReservaCadastrar";
 import { Salas } from "../Paginas/Salas";
 import { SalasCadastrar } from "../Paginas/SalasCadastrar";
 import { ReservaEditar } from "../Paginas/ReservaEditar";
-
+import { Gestores } from "../Paginas/Gestores";
+import { GestorCadastrar } from "../Paginas/Gestorcadastrar";
+import { GestorEditar } from "../Paginas/GestorEditar";
+import { SalaEditar } from "../Paginas/SalaEditar";
 
 export function Rotas() {
   return (
@@ -44,8 +47,14 @@ export function Rotas() {
         <Route path='salas'>
           <Route index element={<Salas />}/>
           <Route path="salaCad" element={<SalasCadastrar />}/>
-        
+          <Route path="editar/:id" element={<SalaEditar />} />
+        </Route>
 
+        <Route path='gestores'>
+          <Route index element={< Gestores/>} />
+          <Route path="editar/:id" element={< GestorEditar />} />
+          <Route path="GestorCadastrar" element={<GestorCadastrar />}/>
+          
         </Route>
         
       </Route>
