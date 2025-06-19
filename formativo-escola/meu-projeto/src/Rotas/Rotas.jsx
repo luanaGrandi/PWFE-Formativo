@@ -41,6 +41,7 @@ export function Rotas() {
         <Route path='reservas'>
           <Route index element= {<Reserva/>}/>
           <Route path="reservaCad" element={<ReservaCadastrar />} />
+          <Route path="editar/:id" element={< ReservaEditar />} />
           
         </Route>
         

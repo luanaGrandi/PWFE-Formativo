@@ -9,48 +9,51 @@ import { Link } from 'react-router-dom';
 export function Reserva() {
     const [reservas, setReservas] = useState([]);
     const [disciplinas, setDisciplinas] = useState([]);
-    const [professores, setProfessores] = useState([]);
+    const [professores, setProfessores] = useState({}); // mudei para objeto, já que você usa como chave-valor
     const [salas, setSalas] = useState({}); // opcional para exibir nome da sala
 
     useEffect(() => {
-        const token = localStorage.getItem('access_token');
+        const fetchData = async () => {
+            const token = localStorage.getItem('access_token');
+            
+            try {
+                // Buscar disciplinas
+                const disciplinasRes = await axios.get('http://127.0.0.1:8000/api/disciplinas/', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                setDisciplinas(disciplinasRes.data);
 
-        // Buscar disciplinas (para exibir nome, se necessário)
-        axios.get('http://127.0.0.1:8000/api/disciplinas/', {
-            headers: { 'Authorization': `Bearer ${token}` }
-        })
-        .then(response => setDisciplinas(response.data))
-        .catch(error => console.error("Erro ao buscar disciplinas: ", error));
+                // Buscar professores
+                const professoresRes = await axios.get('http://127.0.0.1:8000/api/usuario/', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const professorPorId = {};
+                professoresRes.data.forEach(prof => {
+                    professorPorId[prof.id] = `${prof.username}`;
+                });
+                setProfessores(professorPorId);
 
-        // Buscar professores
-        axios.get('http://127.0.0.1:8000/api/usuario/', {
-            headers: { 'Authorization': `Bearer ${token}` }
-        })
-        .then(response => {
-            const professorPorId = {};
-            response.data.forEach(prof => {
-                professorPorId[prof.id] = `${prof.username}`;
-            });
-            setProfessores(professorPorId);
-        })
-        .catch(error => console.error("Erro ao buscar professores", error));
+                // Buscar reservas
+                const reservasRes = await axios.get('http://127.0.0.1:8000/api/reservas/', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                setReservas(reservasRes.data);
+            } catch (error) {
+                console.error("Erro ao buscar dados:", error);
+            }
+        };
 
-        // Buscar reservas de ambientes
-        axios.get('http://127.0.0.1:8000/api/reservas/', {
-            headers: { 'Authorization': `Bearer ${token}` }
-        })
-        .then(response => setReservas(response.data))
-        .catch(error => console.error("Erro ao buscar reservas", error));
+        fetchData();
     }, []);
 
     // Exibir o nome do período de forma legível
     function periodoDisplay(periodo) {
-        switch (periodo) {
-            case 'M': return 'Manhã';
-            case 'T': return 'Tarde';
-            case 'N': return 'Noite';
-            default: return periodo;
-        }
+        const periodos = {
+            'M': 'Manhã',
+            'T': 'Tarde',
+            'N': 'Noite'
+        };
+        return periodos[periodo] || periodo;
     }
 
     const handleDelete = (id) => {
@@ -106,7 +109,7 @@ export function Reserva() {
                                 <td>{reserva.data_inicio}</td>
                                 <td>{reserva.data_termino}</td>
                                 <td>
-                                    <Link to={`/inicial/reserva/editar/${reserva.id}`}>
+                                    <Link to={`/inicial/reservas/editar/${reserva.id}`}>
                                         <img className={estilos.icone} src={editar} alt="editar" />
                                     </Link>
                                     <img

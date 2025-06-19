@@ -5,7 +5,7 @@ import axios from 'axios';
 import estilos from './Cadastrar.module.css';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
- 
+
 const schemaReservas = z.object({
     periodo: z.enum(['M', 'T', 'N'], {
         errorMap: () => ({ message: 'Selecione um período válido' }),
@@ -13,89 +13,108 @@ const schemaReservas = z.object({
     data_inicio: z.string().min(10, 'Data inválida'),
     data_termino: z.string().min(10, 'Data inválida'),
     sala_reservada: z.number({
-        invalid_type_error: 'Selecione uma sala'
+        invalid_type_error: 'Selecione uma sala',
     }),
     professor: z.number({
-        invalid_type_error: 'Selecione um professor'
+        invalid_type_error: 'Selecione um professor',
     }),
     disciplina: z.number({
-        invalid_type_error: 'Selecione uma disciplina'
+        invalid_type_error: 'Selecione uma disciplina',
     }),
 });
 
- 
 export function ReservaEditar() {
- 
-    const [reservas, setreservas] = useState([]);
+    const [reservas, setReservas] = useState([]);
+    const [salas, setSalas] = useState([]);
+    const [professores, setProfessores] = useState([]);
+    const [disciplinas, setDisciplinas] = useState([]);
     const { id } = useParams();
     const navigate = useNavigate();
- 
+
     const {
         register,
         handleSubmit,
         formState: { errors },
-        reset
+        reset,
     } = useForm({
-        resolver: zodResolver(schemaReservas)
+        resolver: zodResolver(schemaReservas),
     });
- 
+
     useEffect(() => {
-        async function buscarReserva() {
+        async function fetchData() {
             try {
                 const token = localStorage.getItem('access_token');
-                const response = await axios.get('http://127.0.0.1:8000/api/reservas/', {
+
+                // Buscar salas
+                const salasResponse = await axios.get('http://127.0.0.1:8000/api/salas/', {
                     headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
+                        'Authorization': `Bearer ${token}`,
+                    },
                 });
-                setreservas(response.data);
-                //Preenche o formulários com os dados do registro do ID
-                 const resReserva = await axios.get(`http://127.0.0.1:8000/api/reservas/${id}/`, {
+                setSalas(salasResponse.data);
+
+                // Buscar disciplinas
+                const disciplinasResponse = await axios.get('http://127.0.0.1:8000/api/disciplinas/', {
                     headers: {
-                         'Authorization': `Bearer ${token}` 
-                        }
+                        'Authorization': `Bearer ${token}`,
+                    },
                 });
- 
-                // Preenche o formulário
-                reset(resReserva.data);
- 
+                setDisciplinas(disciplinasResponse.data);
+
+                // Buscar professores
+                const professoresResponse = await axios.get('http://127.0.0.1:8000/api/usuario/', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+                setProfessores(professoresResponse.data);
+
+                // Buscar reserva específica
+                const reservaResponse = await axios.get(`http://127.0.0.1:8000/api/reservas/${id}/`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+
+                // Preencher o formulário com os dados da reserva
+                reset(reservaResponse.data);
             } catch (error) {
-                console.error("Erro ao carregar reservas", error);
+                console.error("Erro ao carregar dados", error);
             }
         }
-        buscarReserva();
-    }, []);
- 
-    async function obterDadosFormulario(data) {
-      console.log("Dados do formulário:", data);
+        fetchData();
+    }, [id, reset]);
+
+    async function onSubmit(data) {
+        console.log("Dados do formulário:", data);
         try {
             const token = localStorage.getItem('access_token');
- 
+
+            // Enviar dados de reserva editados
             const response = await axios.patch(
                 `http://127.0.0.1:8000/api/reservas/${id}/`,
                 data,
                 {
                     headers: {
                         'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    }
+                        'Content-Type': 'application/json',
+                    },
                 }
             );
- 
-            console.log('reserva cadastrado com sucesso!', response.data);
-            alert('reserva editada com sucesso!');
+
+            console.log('Reserva editada com sucesso!', response.data);
+            alert('Reserva editada com sucesso!');
             reset();
             navigate('/inicial/reservas');
- 
         } catch (error) {
-            console.error('Erro ao cadastrar reserva', error);
-            alert("Erro ao editar reserva");
+            console.error('Erro ao editar reserva', error);
+            alert("Erro ao editar a reserva");
         }
     }
- 
+
     return (
         <div className={estilos.conteiner}>
-            <form className={estilos.loginForm} onSubmit={handleSubmit(obterDadosFormulario)}>
+            <form className={estilos.loginForm} onSubmit={handleSubmit(onSubmit)}>
                 <h2 className={estilos.titulo}>Editar Reservas</h2>
 
                 <label className={estilos.nomeCampo}>Período</label>
