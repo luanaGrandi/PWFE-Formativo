@@ -10,7 +10,7 @@ export function Menu(){
     const tipo = localStorage.getItem('tipo');
 
     const linkDisciplina = tipo ==='P' ?  'DisciplinaProf' : 'disciplina'
-    
+    const linkReserva = tipo ==='P' ?  'ReservaProf' : 'reservas'
     
 
     return(
@@ -25,7 +25,7 @@ export function Menu(){
                     </Link>
                 </div>
                 <div className={estilos.card}>
-                    <Link to= 'reservas'>
+                    <Link to= {linkReserva}>
                         <img className={estilos.icone} src={ambiente} alt="icone de localização" />
                         <label className={estilos.descricao} alt='ambientes do professor'>Reserva</label>
                     </Link>

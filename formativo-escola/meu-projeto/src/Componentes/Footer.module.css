@@ -5,15 +5,17 @@
 
 .container{
     background-color: #4D3E6A;
-    height: 7vh;
+    height: 8vh;
     border: none;
     width: 100%;
+    margin-top: 4vh;
+
     
 }
 
 .creditos{
     padding-top: 2vh;
-    font-size: 2vh;
+    font-size: 3vh;
     color: #ffff;
-    padding-left: 90vh;
+    padding-left: 100vh;
 }

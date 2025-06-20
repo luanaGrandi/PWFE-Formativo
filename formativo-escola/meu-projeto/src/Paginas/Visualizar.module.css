@@ -11,10 +11,12 @@
 }
 
 .tituloCard{
-    font-size: 28px;
+    font-size: 6vh;
     font-weight: bold;
-    color: #444;
-    margin-bottom: 30px;
+    color: #4D3E6A;
+    margin-top: 6vh;
+    text-align:  center;
+
 }
 
 .listaCard{
@@ -22,11 +24,17 @@
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
     width: 100%;
+    font-size: 2.5vh;
+     display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
 }
 
 .card{
     background-color: #f9f9f9;
-    border-left: 6px solid #4D3E6A;
+    border-left: 15px solid #4D3E6A;
+    margin-left: 6vh;
+    margin-top: 5vh;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -38,13 +46,13 @@
 }
 
 .nome{
-    font-size: 18px;
+    font-size: 3vh;
     color: #4D3E6A;
     margin-bottom: 10px;
     
 }
 
-/* pagina de disciplina */
+/* pagina de disciplina, reserva e ambientes do admin */
 .container{
     display: flex;
     justify-content: center;
