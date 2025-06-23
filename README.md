@@ -81,6 +81,7 @@ Para que o banco de dados funcione, você precisa criar a tabela no MySQL Workbe
 
 ```
   CREATE DATABASE cadastro (nome da tabela);
+  
   USE cadastro(nome da tabela);
 ```
 
@@ -90,14 +91,14 @@ Após a criação da tabela no banco de dados. De esses comandos para salvar sua
   py manage.py migrate 
 ```
 
-## Criar usuário
+##  Criar usuário
 Para que você possa ter acesso a todas as funcionalidades do projeto, precisa criar um usuário com essa comando:
 ```python manage.py createsuperuser```
 
-## Rodar o Projeto 🚀
+##  Rodar o Projeto 🚀
 Para rodar o projeto basta dar esse comando:
   - ```python manage.py runserver```
 
-## Chegamos ao final 🎉
+##  Chegamos ao final 🎉
 
 Passo a passo de como rodar o projeto está pronto, agora só falta você utiliza-lo !
