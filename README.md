@@ -91,7 +91,7 @@ Após a criação da tabela no banco de dados. De esses comandos para salvar sua
   py manage.py migrate 
 ```
 
-##  Criar usuário
+##  Criar o usuario 
 Para que você possa ter acesso a todas as funcionalidades do projeto, precisa criar um usuário com essa comando:
 ```python manage.py createsuperuser```
 
