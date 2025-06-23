@@ -42,19 +42,16 @@ O sistema possui dois tipos de usuários:
 # Clone o repositório
 git clone https://github.com/seu-usuario/seu-repositorio.git
 
-# Instale e inicie o frontend
-cd frontend
-npm install
-npm start
+# Frontend:
+abrir a pasta: formativo-escola
+cd meu-projeto
+npm i
+npm run dev
 
-# Em outro terminal, inicie o backend
-cd backend
-python -m venv venv
-# Ative o ambiente virtual:
-# Linux/Mac:
-source venv/bin/activate
-# Windows:
-venv\Scripts\activate
+# Backend
+- Abra a pasta formativa em uma nova pagina do vscode
+python -m venv env
+env\Scripts\activate
 
 pip install -r requirements.txt
 python manage.py runserver
