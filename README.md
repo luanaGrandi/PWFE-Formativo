@@ -53,5 +53,47 @@ npm run dev
 python -m venv env
 env\Scripts\activate
 
-pip install -r requirements.txt
-python manage.py runserver
+## Verificar banco de dados 🔍
+
+Nesse projeto estamos utilizando o banco de dados, para que ele funcione sem nenhume erro, faça essas passos:
+ - entre na pasta: projeto;
+ - entre no: ```settings.py```
+ - procure o nome:```DATABASES```
+- Veja se ele está correto desta forma:
+  ```
+   'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cadastro',
+        'USER': 'root', -. esse user será do seu mysql
+        'PASSWORD': 'senai', -> essa senha será de acordo com a senha do seu mysql
+        'HOST': 'localhost',
+        'PORT': '3306'
+    }
+  ```
+
+
+Para que o banco de dados funcione, você precisa criar a tabela no MySQL Workbench, usando o comando
+
+```
+  CREATE DATABASE cadastro (nome da tabela);
+  USE cadastro(nome da tabela);
+```
+
+Após a criação da tabela no banco de dados. De esses comandos para salvar suas alterações:
+```
+  py manage.py makemigrations
+   py manage.py migrate 
+```
+
+##  Criar usuário
+Para que você possa ter acesso a todas as funcionalidades do projeto, precisa criar um usuário com essa comando:
+```python manage.py createsuperuser```
+
+## Rodar o Projeto 🚀
+Para rodar o projeto basta dar esse comando:
+  - ```python manage.py runserver```
+
+## Chegamos ao final 🎉
+
+Passo a passo de como rodar o projeto está pronto, agora só falta você utiliza-lo !  p
+
