@@ -53,24 +53,29 @@ npm run dev
 python -m venv env
 env\Scripts\activate
 
-## 5- Verificar banco de dados 🔍
 
-Nesse projeto estamos utilizando o banco de dados, para que ele funcione sem nenhume erro, faça essas passos:
- - entre na pasta: projeto;
- - entre no: ```settings.py```
- - procure o nome:```DATABASES```
-- Veja se ele está correto desta forma:
-  ```
-   'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cadastro',
-        'USER': 'root', -. esse user será do seu mysql
-        'PASSWORD': 'senai', -> essa senha será de acordo com a senha do seu mysql
-        'HOST': 'localhost',
-        'PORT': '3306'
-    }
-  ```
+---
 
+## Guia para Configuração e Execução do Projeto
+
+### 5️⃣ Verificar banco de dados 🔍
+
+Neste projeto, estamos utilizando um banco de dados. Para que ele funcione sem nenhum erro, siga estes passos:
+
+- Entre na pasta: `projeto`
+- Abra o arquivo: `settings.py`
+- Procure pela configuração: `DATABASES`
+- Verifique se está configurada desta forma:
+
+```python
+'default': {
+    'ENGINE': 'django.db.backends.mysql',
+    'NAME': 'cadastro',
+    'USER': 'root',  # seu usuário do MySQL
+    'PASSWORD': 'senai',  # sua senha do MySQL
+    'HOST': 'localhost',
+    'PORT': '3306',
+}
 
 Para que o banco de dados funcione, você precisa criar a tabela no MySQL Workbench, usando o comando
 
@@ -85,15 +90,11 @@ Após a criação da tabela no banco de dados. De esses comandos para salvar sua
   py manage.py migrate 
 ```
 
-## 6- Criar usuário
+## Criar usuário
 Para que você possa ter acesso a todas as funcionalidades do projeto, precisa criar um usuário com essa comando:
 ```python manage.py createsuperuser```
 
-Preencha com seu nome e o numero da sua matricula!
-
-❗ É importante que você crie um superuser, para que você possa ter acesso a todas as funcionalidades da API.
-
-## 7- Rodar o Projeto 🚀
+## Rodar o Projeto 🚀
 Para rodar o projeto basta dar esse comando:
   - ```python manage.py runserver```
 
