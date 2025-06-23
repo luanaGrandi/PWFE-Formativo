@@ -53,7 +53,7 @@ npm run dev
 python -m venv env
 env\Scripts\activate
 
-## Verificar banco de dados 🔍
+## 5- Verificar banco de dados 🔍
 
 Nesse projeto estamos utilizando o banco de dados, para que ele funcione sem nenhume erro, faça essas passos:
  - entre na pasta: projeto;
@@ -82,18 +82,21 @@ Para que o banco de dados funcione, você precisa criar a tabela no MySQL Workbe
 Após a criação da tabela no banco de dados. De esses comandos para salvar suas alterações:
 ```
   py manage.py makemigrations
-   py manage.py migrate 
+  py manage.py migrate 
 ```
 
-##  Criar usuário
+## 6- Criar usuário
 Para que você possa ter acesso a todas as funcionalidades do projeto, precisa criar um usuário com essa comando:
 ```python manage.py createsuperuser```
 
-## Rodar o Projeto 🚀
+Preencha com seu nome e o numero da sua matricula!
+
+❗ É importante que você crie um superuser, para que você possa ter acesso a todas as funcionalidades da API.
+
+## 7- Rodar o Projeto 🚀
 Para rodar o projeto basta dar esse comando:
   - ```python manage.py runserver```
 
 ## Chegamos ao final 🎉
 
-Passo a passo de como rodar o projeto está pronto, agora só falta você utiliza-lo !  p
-
+Passo a passo de como rodar o projeto está pronto, agora só falta você utiliza-lo !
