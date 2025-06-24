@@ -5,7 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import estilos from './Cadastrar.module.css';
 import { useState, useEffect } from 'react';
- 
+
+// Define o esquema de validação usando Zod para os campos do formulário de Disciplina
 const schemaDisciplina = z.object({
     nome: z.string()
         .min(1, 'Informe ao menos um caractere')
@@ -27,7 +28,8 @@ const schemaDisciplina = z.object({
 });
  
 export function DisciplinaCadastrar() {
- 
+    
+    // Cria um estado para armazenar a lista de professores que virá da API
     const [professores, setProfessores] = useState([]);
     const {
         register,
@@ -37,7 +39,9 @@ export function DisciplinaCadastrar() {
     } = useForm({
         resolver: zodResolver(schemaDisciplina)
     });
- 
+    
+    
+    //busca a lista de professores na API utilizando as rotas/urls
     useEffect(() => {
         async function buscarProfessores() {
             try {
@@ -47,22 +51,22 @@ export function DisciplinaCadastrar() {
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                
-                
-                
-                setProfessores(response.data);
+                setProfessores(response.data); //atualiza o estado com os professores
             } catch (error) {
                 console.error("Erro ao carregar professores", error);
             }
         }
         buscarProfessores();
     }, []);
- 
+    
+    // função cque é chamada ao enviar o formulario
     async function obterDadosFormulario(data) {
       console.log("Dados do formulário:", data);
         try {
+            // pega o token de acesso
             const token = localStorage.getItem('access_token');
- 
+            
+            // Envia os dados para a API via POST
             const response = await axios.post(
                 'http://127.0.0.1:8000/api/disciplinas/',
                 data,
@@ -76,8 +80,10 @@ export function DisciplinaCadastrar() {
  
             console.log('Disciplina cadastrado com sucesso!', response.data);
             alert('Disciplina cadastrado com sucesso!');
-            reset();
- 
+            reset(); 
+            // reset é para limpar o formulario
+            
+        // mensagem de erro, se não der certo
         } catch (error) {
             console.error('Erro ao cadastrar disciplina', error);
             alert("Erro ao cadastrar disciplina");
@@ -85,6 +91,8 @@ export function DisciplinaCadastrar() {
     }
  
     return (
+        // aqui é a estrutura visual para fazer o preenchimento das informaçoes das disciplonas
+        // tras a validação dos dados e os erros
         <div className={estilos.conteiner}>
            
             <form className={estilos.loginForm} onSubmit={handleSubmit(obterDadosFormulario)}>

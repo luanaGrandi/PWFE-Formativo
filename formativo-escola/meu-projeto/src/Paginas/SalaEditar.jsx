@@ -5,7 +5,8 @@ import axios from 'axios';
 import estilos from './Cadastrar.module.css';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
- 
+
+// esta funçao serve para fazer o update da sala atraves do seu id especifico
 const schemaSalas = z.object({
   nome: z.string()
     .min(1, 'Informe ao menos um caractere')

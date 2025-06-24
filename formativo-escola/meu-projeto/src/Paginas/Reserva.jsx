@@ -6,6 +6,9 @@ import editar from '../assets/editar.png';
 import estilos from './Visualizar.module.css';
 import { Link } from 'react-router-dom';
 
+// aqui nos fazemos a listagem de todas as reservas cadastradas com as suas informaçoes necessarias
+// tambem temos os "botoes" para ir na pagina de cadastro ou na pagina de editar reservas
+// tambem podemos fazer a exclusão da reservas escolhida
 export function Reserva() {
     const [reservas, setReservas] = useState([]);
     const [disciplinas, setDisciplinas] = useState([]);

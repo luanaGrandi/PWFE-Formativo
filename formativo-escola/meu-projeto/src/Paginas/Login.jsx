@@ -8,7 +8,8 @@ import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Cabecalho } from '../Componentes/Cabecalho';
 import { Footer } from '../Componentes/Footer';
- 
+
+// essa função serve para fazer o login/validação dos dados
 // pegar do backend
 const schemaLogin = z.object({
     username: z.string()

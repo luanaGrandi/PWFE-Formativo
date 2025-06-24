@@ -2,6 +2,9 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import estilos from './Visualizar.module.css';
 
+
+// aqui o professor, pode ver a sua reserva individual, mostrando os 
+// seus campos especificos e necessarios para o professor saber sua reserva
 export function ReservaProfessores() {
   const [reservas, setReservas] = useState([]);
   const [salas, setSalas] = useState({});

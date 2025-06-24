@@ -6,6 +6,9 @@ import editar from '../assets/editar.png';
 import estilos from './Visualizar.module.css'
 import { Link } from 'react-router-dom';
 
+// aqui nos fazemos a listagem de todas os gestores cadastradas com as suas informaçoes necessarias
+// tambem temos os "botoes" para ir na pagina de cadastro ou na pagina de editar os gestores
+// tambem podemos fazer a exclusão do gestor escolhida
 
 export function Gestores(){
     const [gestores, setGestores] = useState([])

@@ -5,6 +5,10 @@ import axios from 'axios';
 import estilos from './Cadastrar.module.css';
 import { useState, useEffect } from 'react';
 
+// Define o esquema de validação usando Zod para os campos do formulário de reservas
+// tambem fazemos a estrutura visual para fazer o preenchimento das informaçoes das disciplonas
+// tras a validação dos dados e os erros
+
 // Schema de validação com Zod
 const schemaReserva = z.object({
     periodo: z.enum(['M', 'T', 'N'], {

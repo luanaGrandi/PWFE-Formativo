@@ -5,6 +5,10 @@ import axios from 'axios';
 import estilos from './Cadastrar.module.css';
 import { useState, useEffect } from 'react';
 
+// esta função é para fazer o cadastro de gestores
+
+// Define o esquema de validação usando Zod para os campos do formulário de cadastro gestores
+
 const schemaGestor = z.object({
     username: z.string()
         .min(5, 'Informe ao menos dez caractere')
@@ -68,7 +72,7 @@ export function GestorCadastrar() {
         try {
             const token = localStorage.getItem('access_token');
 
-            // Adiciona o campo tipo para indicar que é gestor
+            // campo tipo para indicar que é gestor
             const dataComTipo = { ...data, tipo: 'G' };
 
             const response = await axios.post(
@@ -89,6 +93,7 @@ export function GestorCadastrar() {
             // Atualiza lista local para incluir o novo gestor
             setGestores((oldGestores) => [...oldGestores, response.data]);
 
+            // se der erro imprime essa mensagem de erro
         } catch (error) {
             console.error('Erro ao cadastrar usuário', error);
             alert("Erro ao cadastrar usuário");
@@ -96,6 +101,8 @@ export function GestorCadastrar() {
     }
 
     return (
+        // aqui é a estrutura visual para fazer o preenchimento das informaçoes dos gestores
+        // tras a validação dos dados e os erros
         <div className={estilos.conteiner}>
 
             <form className={estilos.loginForm} onSubmit={handleSubmit(obterDadosFormulario)}>

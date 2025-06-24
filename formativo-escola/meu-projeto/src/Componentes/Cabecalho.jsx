@@ -18,21 +18,22 @@ export function Cabecalho() {
 
   return (
     <header className={estilos.container}>
-      {/* Coloque onClick na logo */}
+      {/* apos o usuario clicar na logo, ele voltara para a pagina inicial */}
       <img
         className={estilos.imgLogo}
         src={logo}
         alt="Logo Prof Conecta"
         onClick={handleLogoClick}
-        style={{ cursor: 'pointer' }}  // muda o cursor para indicar que é clicável
       />
 
+      {/* para aparecer o nome do usuario que esta logado */}
       {nomeUsuario && (
         <div className={estilos.usuarioSaudacao}>
           Olá, {nomeUsuario}
         </div>
       )}
 
+      {/* botao para fazer o logout/sair  */}
       <div className={estilos.sair} onClick={handleLogout}>
         <p>Sair</p>
         <img src={sair} alt="icone de sair" />

@@ -5,7 +5,8 @@ import axios from 'axios';
 import estilos from './Cadastrar.module.css';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
- 
+
+// Define o esquema de validação usando Zod para os campos do formulário de Disciplina
 const schemaDisciplina = z.object({
     nome: z.string()
         .min(1, 'Informe ao menos um caractere')
@@ -27,7 +28,8 @@ const schemaDisciplina = z.object({
 });
  
 export function DisciplinaEditar() {
- 
+    
+    // Cria um estado para armazenar a lista de professores que virá da API
     const [professores, setProfessores] = useState([]);
     const { id } = useParams();
     const navigate = useNavigate();
@@ -40,7 +42,8 @@ export function DisciplinaEditar() {
     } = useForm({
         resolver: zodResolver(schemaDisciplina)
     });
- 
+    
+     //busca a lista de professores na API utilizando as rotas/urls
     useEffect(() => {
         async function buscarProfessores() {
             try {
@@ -88,7 +91,9 @@ export function DisciplinaEditar() {
             alert('Disciplina editada com sucesso!');
             reset();
             navigate('/inicial/disciplina');
- 
+            // apos editar, ir para essa pagina
+            
+            // se ocorrer algum erro
         } catch (error) {
             console.error('Erro ao cadastrar disciplina', error);
             alert("Erro ao editar disciplina");
@@ -96,6 +101,8 @@ export function DisciplinaEditar() {
     }
  
     return (
+         // aqui é a estrutura visual para fazer o preenchimento das informaçoes das disciplonas
+        // tras a validação dos dados e os erros
         <div className={estilos.conteiner}>
            
             <form className={estilos.loginForm} onSubmit={handleSubmit(obterDadosFormulario)}>

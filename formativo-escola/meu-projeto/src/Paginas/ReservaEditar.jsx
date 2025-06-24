@@ -6,6 +6,8 @@ import estilos from './Cadastrar.module.css';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+// esta função é para fazer o update de uma reserva especifica atraves
+// do seu id especifico
 const schemaReservas = z.object({
     periodo: z.enum(['M', 'T', 'N'], {
         errorMap: () => ({ message: 'Selecione um período válido' }),

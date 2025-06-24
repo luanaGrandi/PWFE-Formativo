@@ -6,7 +6,9 @@ import estilos from './Cadastrar.module.css';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
  
-
+// essa função serve para fazer o update dos professores
+// onde fazemos as validações de erro e de sucesso
+// fazemos a estrutura visual para fazer o preenchimento das informaçoes dos professores
 const schemaDisciplina = z.object({
     username: z.string()
         .min(5, 'Informe ao menos dez caractere')

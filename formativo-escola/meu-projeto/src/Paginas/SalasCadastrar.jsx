@@ -5,6 +5,9 @@ import axios from 'axios';
 import estilos from './Cadastrar.module.css';
 import { useNavigate } from 'react-router-dom';
 
+
+// esta função serve para fazer o cadastro de uma nova sala
+// com as suas informações necessarias
 const schemaSala = z.object({
   nome: z.string()
     .min(1, 'Informe ao menos um caractere')

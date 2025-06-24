@@ -6,7 +6,7 @@ import estilos from './Cadastrar.module.css';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
  
-
+// esta função é para editar as informações que voce deseja do gestor
 const schemaGestor= z.object({
     username: z.string()
         .min(5, 'Informe ao menos dez caractere')
@@ -91,12 +91,15 @@ export function GestorEditar() {
                     }
                 }
             );
- 
+            //  se der certo, mostra mensagem de acerto
             console.log('Gestor cadastrado com sucesso!', response.data);
             alert('gestor editada com sucesso!');
             reset();
+            // reseta as informações
             navigate('/inicial/gestores');
- 
+            // volta para a pagina
+            
+        // se der errro
         } catch (error) {
             console.error('Erro ao cadastrar gestor', error);
             alert("Erro ao editar gestor");
@@ -104,6 +107,7 @@ export function GestorEditar() {
     }
  
     return (
+         // aqui é a estrutura visual para fazer o update das informaçoes dos gestores
         <div className={estilos.conteiner}>
             <form className={estilos.loginForm} onSubmit={handleSubmit(obterDadosFormulario)}>
                                <h2 className={estilos.titulo}>Editar Gestor</h2>

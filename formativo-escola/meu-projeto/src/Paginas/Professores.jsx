@@ -6,7 +6,9 @@ import editar from '../assets/editar.png';
 import estilos from './Visualizar.module.css'
 import { Link } from 'react-router-dom';
 
-
+// aqui nos fazemos a listagem de todas os professores cadastradas com as suas informaçoes necessarias
+// tambem temos os "botoes" para ir na pagina de cadastro ou na pagina de editar os professores
+// tambem podemos fazer a exclusão do professor escolhido
 export function Professores(){
     const [professores, setProfessores] = useState([])
  

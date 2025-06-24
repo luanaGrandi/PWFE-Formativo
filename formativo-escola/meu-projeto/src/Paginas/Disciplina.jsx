@@ -6,6 +6,11 @@ import editar from '../assets/editar.png';
 import estilos from './Visualizar.module.css'
 import { Link } from 'react-router-dom';
 
+
+// aqui nos fazemos a listagem de todas as disciplinas cadastradas com as suas informaçoes necessarias
+// tambem temos os "botoes" para ir na pagina de cadastro ou na pagina de editar disiciplinas]
+// tambem podemos fazer a exclusão da disciplina escolhida
+
 export function Disciplina(){
     const[disciplinas, setDisciplinas] = useState([]);
     const[professores, setprofessores] = useState([]);
@@ -91,6 +96,7 @@ export function Disciplina(){
                         </tr>
                     </thead>
                     <tbody>
+                        {/* pegar todos os campos da disciplina de acordo com o back */}
                         {disciplinas.map(Disciplina =>(
                             <tr key={Disciplina.id}>
                                 <td>{Disciplina.nome}</td>
@@ -103,7 +109,8 @@ export function Disciplina(){
                                     <Link to={`/inicial/disciplina/editar/${Disciplina.id}`}>
                                         <img className={estilos.icone} src={editar} />
                                     </Link>
-                                   
+
+                                    {/* excluir a disciplina */}
                                     <img className={estilos.icone} src={excluir}
                                     onClick={() => handleDelete(Disciplina.id)}/> 
                                     
